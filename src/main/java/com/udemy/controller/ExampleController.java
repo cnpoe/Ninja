@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.udemy.model.Person;
+
 @Controller
 @RequestMapping("/example")
 public class ExampleController {
@@ -15,13 +17,13 @@ public class ExampleController {
 	//@RequestMapping(value="/exampleString", method=RequestMethod.GET)
 	@GetMapping("/exampleString")
 	public String exampleString(Model model){
-		model.addAttribute( "name", "Luis" );
+		model.addAttribute( "person", new Person( "Luis" , 23 ) );
 		return EXAMPLE_VIEW;
 	}
 	@RequestMapping(value="/exampleMAV", method=RequestMethod.GET)
 	public ModelAndView exampleMAV(){
 		ModelAndView mav = new ModelAndView(EXAMPLE_VIEW);
-		mav.addObject("name", "Alberto");
+		mav.addObject( "person", new Person( "Alberto" , 30 ) );
 		return mav;
 	}
 }
