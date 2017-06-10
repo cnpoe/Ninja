@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.udemy.model.Person;
 
@@ -17,7 +18,18 @@ public class Example3Controller {
 	public static final String FORM_VIEW = "form";
 	public static final String RESULT_VIEW = "result";
 	
-	@GetMapping("/showform")
+	/*
+	@GetMapping( "/" )
+	public String redirect(){
+		return "redirect:/example3/showform";
+	}*/
+	
+	@GetMapping( "/" )
+	public RedirectView redirect(){
+		return new RedirectView( "/example3/showform" );
+	}
+	
+	@GetMapping( "/showform" )
 	public String showForm( Model model ){
 		model.addAttribute( "person" , new Person() );
 		return FORM_VIEW;
