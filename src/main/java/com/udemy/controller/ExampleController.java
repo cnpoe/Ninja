@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.udemy.component.ExampleComponent;
 import com.udemy.model.Person;
+import com.udemy.service.ExampleService;
 
 
 
@@ -29,28 +30,24 @@ public class ExampleController {
 	@Qualifier("exampleComponent")
 	private ExampleComponent exampleComponent;
 	
+	@Autowired
+	@Qualifier("exampleService")
+	private ExampleService exampleService;
+	
 	public static final String EXAMPLE_VIEW = "example"; 
 	//@RequestMapping(value="/exampleString", method=RequestMethod.GET)
 	@GetMapping("/exampleString")
 	public String exampleString(Model model){
 		exampleComponent.sayHello();
-		model.addAttribute( "people", getPeople() );
+		model.addAttribute( "people", exampleService.getListPeople() );
 		return EXAMPLE_VIEW;
 	}
 	@RequestMapping(value="/exampleMAV", method=RequestMethod.GET)
 	public ModelAndView exampleMAV(){
 		ModelAndView mav = new ModelAndView(EXAMPLE_VIEW);
-		mav.addObject( "people", getPeople() );
+		mav.addObject( "people", exampleService.getListPeople() );
 		return mav;
 	}
 	
-	private List < Person > getPeople(){
-		List < Person > people = new ArrayList < Person > ();
-		people.add( new Person( "Jon" , 23 ) );
-		people.add( new Person( "Mikel" , 30 ) );
-		people.add( new Person( "Eva" , 43 ) );
-		people.add( new Person( "Peter" , 18 ) );
-		people.add( new Person( "Diana" , 19 ) );
-		return people;
-	}
+	
 }
