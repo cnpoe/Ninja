@@ -1,2 +1,15 @@
 banner:
   location: classpath:/folderexample/banner.txt
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydb
+    username: root
+    password: luis
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      dialect: org.hibernate.dialect.MySQL5Dialect
